@@ -19,5 +19,13 @@ app.get('/api/notes', (req, res) => { // we're essentially telling express to re
     res.json(note.slice(1)); // note.slice is mean to prevent an undefined error on the saved files column.
 });
 app.get('/', (req, res) => { // setting up the index in this route.
-    res.sendFile(path.join(__dirname, './public/index.html'))
+    res.sendFile(path.join(__dirname, './public/index.html')) // __dirname is used to return the directory path of the current module.
 });
+app.get('/notes', (req, res) => { // this is an express route to create the /notes directory on our URL then send us to the notes.html file.
+    res.sendFile(path.join(__dirname, './public/notes.html'))
+});
+
+// in the following section i need a function to create a note and assign an id so we can delete it later.
+function newNote(body, array) {
+    const 
+}
