@@ -27,5 +27,19 @@ app.get('/notes', (req, res) => { // this is an express route to create the /not
 
 // in the following section i need a function to create a note and assign an id so we can delete it later.
 function newNote(body, array) {
-    const 
-}
+    const note = body;
+    if(!Array.isArray(array))
+    array = [];
+    if(array.length === 0) // an if statement in the case that there's nothing entered. it will disallow the note from being saved.
+    array.push(0);
+    body.id = array[0];
+    array[0]++;
+    array.push(note);
+
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify(array, null, 2) // in the case that the note is saveable we'll put it in our db.json file. we've set our value as the array, replacer as null, and the space is set in the 3rd position.
+    );
+    return note;
+};
+
