@@ -66,3 +66,11 @@ function removeNote(id, notesArray) {
 };
 
 // i need a delete route method.
+app.delete('/api/notes/:id', (req, res) => {
+    deleteNote(req.params.id, noteData);
+    res.json(true);
+});
+
+app.listen(PORT, () => {
+    console.log(`Application running on http://localhost:${PORT}`);
+});
