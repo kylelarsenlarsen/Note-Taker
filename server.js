@@ -43,3 +43,8 @@ function newNote(body, array) {
     return note;
 };
 
+// need to create a route to post the generated note.
+app.post('/api/notes', (req, res) => {
+    const scribe = newNote(req.body, noteData);
+    res.json(scribe);
+});
