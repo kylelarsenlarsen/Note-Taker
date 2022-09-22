@@ -1,16 +1,26 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "heroku": "^7.63.4",
+    "heroku": "^7.3.0",
     "uuid": "^9.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylelarsenlarsen/Note-Taker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kylelarsenlarsen/Note-Taker/issues"
+  },
+  "homepage": "https://github.com/kylelarsenlarsen/Note-Taker#readme",
+  "description": ""
 }

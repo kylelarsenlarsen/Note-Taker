@@ -43,6 +43,7 @@ function newNote(body, notesArray) {
         path.join(__dirname, './db/db.json'),
         JSON.stringify(notesArray, null, 2) // in the case that the note is saveable we'll put it in our db.json file. we've set our value as the array, replacer as null, and the space is set in the 3rd position.
     );
+    console.log(note);
     return note;
 };
 
