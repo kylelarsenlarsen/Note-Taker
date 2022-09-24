@@ -2,7 +2,6 @@ const noteValue = require('./db/db.json');
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
-const uuid = require('uuid');
 
 // in the following code i will be setting up the port and calling the express application into in this code.
 const app = express();
