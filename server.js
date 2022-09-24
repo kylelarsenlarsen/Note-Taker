@@ -2,6 +2,7 @@ const noteValue = require('./db/db.json');
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const uuid = require('uuid');
 
 // in the following code i will be setting up the port and calling the express application into in this code.
 const app = express();
@@ -16,7 +17,7 @@ app.use(express.static('public')); // app.use is used to mount the specified mid
 
 // in the following i need to retrieve the files and direct them to the correct destination.
 app.get('/api/notes', (req, res) => { // we're essentially telling express to retrieve that delcared pathway.
-    res.json(note.slice(1)); // note.slice is mean to prevent an undefined error on the saved files column.
+    res.json(noteValue); // note.slice is meant to prevent an undefined error on the saved files column.
 });
 app.get('/', (req, res) => { // setting up the index in this route.
     res.sendFile(path.join(__dirname, './public/index.html')) // __dirname is used to return the directory path of the current module.
@@ -31,24 +32,23 @@ app.get('*', (req, res) => {
 // in the following section i need a function to create a note and assign an id so we can delete it later.
 function newNote(body, notesArray) {
     const note = body;
-    if (!Array.isArray(notesArray))
-        notesArray = [];
-    if (notesArray.length === 0) // an if statement in the case that there's nothing entered. it will disallow the note from being saved.
-        notesArray.push(0);
-    body.id = notesArray[0];
-    notesArray[0]++;
+    note.id = notesArray.length+1;
+   
+    console.log('note', note);
+    console.log('notesArray', notesArray);
     notesArray.push(note);
+    console.log('notesArray', notesArray);
 
     fs.writeFileSync(
         path.join(__dirname, './db/db.json'),
-        JSON.stringify(notesArray, null, 2) // in the case that the note is saveable we'll put it in our db.json file. we've set our value as the array, replacer as null, and the space is set in the 3rd position.
+        JSON.stringify(notesArray) // in the case that the note is saveable we'll put it in our db.json file. we've set our value as the array, replacer as null, and the space is set in the 3rd position.
     );
-    console.log(note);
     return note;
 };
 
 // need to create a route to post the generated note.
 app.post('/api/notes', (req, res) => {
+    console.log('noteValue', noteValue);
     const scribe = newNote(req.body, noteValue);
     res.json(scribe);
 });
